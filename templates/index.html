@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>House Price Prediction</title>
+
+  <style>
+    /* ----------- Global Styles ----------- */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* ----------- Form Container ----------- */
+    .form-container {
+      background: #fff;
+      width: 400px;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+      font-weight: 600;
+    }
+
+    /* ----------- Input Fields ----------- */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: #444;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #667eea;
+      outline: none;
+      box-shadow: 0 0 5px rgba(102, 126, 234, 0.5);
+    }
+
+    /* ----------- Submit Button ----------- */
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background: linear-gradient(135deg, #5a6fe0, #6e3e9b);
+      transform: translateY(-2px);
+    }
+
+    /* ----------- Animation ----------- */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ----------- Responsive Design ----------- */
+    @media (max-width: 480px) {
+      .form-container {
+        width: 90%;
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>🏡 House Price Prediction</h2>
+    <form id="houseForm" action="/predict" method="post">
+      <div class="form-group">
+        <label for="area_sqft">Area (sqft)</label>
+        <input type="number" id="area_sqft" name="area_sqft" placeholder="Enter area in sqft" required />
+      </div>
+
+      <div class="form-group">
+        <label for="bedrooms">Bedrooms</label>
+        <input type="number" id="bedrooms" name="bedrooms" placeholder="Number of bedrooms" required />
+      </div>
+
+      <div class="form-group">
+        <label for="bathrooms">Bathrooms</label>
+        <input type="number" id="bathrooms" name="bathrooms" placeholder="Number of bathrooms" required />
+      </div>
+
+      <div class="form-group">
+        <label for="age_years">Age of House (years)</label>
+        <input type="number" id="age_years" name="age_years" placeholder="Enter house age" required />
+      </div>
+
+      <div class="form-group">
+        <label for="distance_city_center_km">Distance to City Center (km)</label>
+        <input type="number" step="0.1" id="distance_city_center_km" name="distance_city_center_km" placeholder="Enter distance in km" required />
+      </div>
+
+      <div class="form-group">
+        <label for="num_schools_nearby">Number of Schools Nearby</label>
+        <input type="number" id="num_schools_nearby" name="num_schools_nearby" placeholder="Enter number of schools nearby" required />
+      </div>
+
+      <div class="form-group">
+        <label for="crime_rate_index">Crime Rate Index</label>
+        <input type="number" step="0.1" id="crime_rate_index" name="crime_rate_index" placeholder="Enter crime rate index" required />
+      </div>
+
+      <button type="submit" class="btn-submit" value="Predict">Predict Price</button>
+    </form>
+    {% if prediction_text %}
+  <p style="margin-top:20px; text-align:center; color:#333; font-weight:600;">
+    {{ prediction_text }}
+  </p>
+{% endif %}
+
+  </div>
+</body>
+</html>
